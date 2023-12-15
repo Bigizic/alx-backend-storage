@@ -1,10 +1,12 @@
 -- a SQL script that creates a trigger that decreases the quantity of an
 -- item after adding a new order.
-CREATE TRIGGER decrease
+DELIMITER $$
+CREATE TRIGGER decrese_item
 AFTER INSERT ON orders
 FOR EACH ROW
 BEGIN
-    UPDATE items
-    SET quantity = quantity - NEW.quantity_ordered
-    WHERE item_id = NEW.item_id;
-END;
+        UPDATE items
+        SET quantity = quantity - NEW.number
+        WHERE name = NEW.item_name;
+END $$
+DELIMITER ;
