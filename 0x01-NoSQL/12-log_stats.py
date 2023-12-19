@@ -24,7 +24,7 @@ def nginx_stats():
     print("Methods:")
     for method, count in method_counts.items():
         print(f"\tmethod {method}: {count}")
-    print(f"{specific_log_count} status check")
+    print(f"{result} status check")
 
 
 if __name__ == '__main__':
