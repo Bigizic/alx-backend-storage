@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Python scirpt that list all documents in a mongodb collection
+@param (mongo_collection): <object pymongo>
+
+Return: a list of all documents else return empty list if no documents
 """
 
 
