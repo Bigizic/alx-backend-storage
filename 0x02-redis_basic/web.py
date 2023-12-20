@@ -8,7 +8,7 @@ import requests
 from typing import Callable
 
 
-# redis instance
+""" redis instance """
 redis_history = redis.Redis()
 
 
@@ -24,10 +24,11 @@ def fetch_data(method: Callable) -> Callable:
         res = redis_history.get(f'result:{url}')
         if res:
             return res.decode('utf-8')
-        result = method(url)
+        res = method(url)
         redis_history.set(f'count:{url}', 0)
-        redis_history.setex(f'result:{url}', 10, result}
-        return result
+        redis_history.setex(f'result:{url}', 10, res}
+        return res
+
     return cacher
 
 
