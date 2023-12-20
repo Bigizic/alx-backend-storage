@@ -10,6 +10,7 @@ import uuid
 
 def count_calls(method: Callable) -> Callable:
     """Track how many times methods of the Cache class are called
+    Return: <Callable>
     """
     @wraps(method)
     def counter(self, *args, **kwargs) -> Any:
@@ -24,6 +25,7 @@ def count_calls(method: Callable) -> Callable:
 
 def call_history(method: Callable) -> Callable:
     """Tracks the call details of a method in a Cache class
+    Return: <Callable>
     """
     @wraps(method)
     def tracker(self, *args, **kwargs) -> Any:
@@ -45,6 +47,7 @@ def call_history(method: Callable) -> Callable:
 
 def replay(fn: Callable) -> None:
     """Displays the call history of a Cache Class method
+    Return: None
     """
     if fn is None or not hasattr(fn, '__self__'):
         return
@@ -61,9 +64,9 @@ def replay(fn: Callable) -> None:
     if history.exists(method_name) != 0:
         method_count = int(history.get(method_name))
 
-    print(f'{method_name} was called {method_count} times')
+    print(f'{method_name} was called {method_count} times:')
     method_inputs = history.lrange(input_k, 0, -1)
-    method_outputs = histpry.lrange(output_k, 0, -1)
+    method_outputs = history.lrange(output_k, 0, -1)
 
     for func_in, func_out in zip(method_inputs, method_outputs):
         print(f'{method_name}(*{func_in}.decode("utf-8")) -> {func_out}')
