@@ -1,3 +1,10 @@
+# Install Redis on Ubuntu
+$ sudo apt-get -y install redis-server
+
+$ pip3 install redis
+
+$ sed -i "s/bind .*/bind 127.0.0.1/g" /etc/redis/redis.conf
+
 ## exercise.py:
 
 Create a Cache class. In the __init__ method, store an instance of the Redis client as a private variable named _redis (using redis.Redis()) and flush the instance using flushdb.
