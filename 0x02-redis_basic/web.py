@@ -8,14 +8,13 @@ import requests
 from typing import Callable
 
 
-""" redis instance """
 redis_history = redis.Redis()
+""" redis instance """
 
 
 def fetch_data(method: Callable) -> Callable:
     """Fetches the output from cached data
     """
-
     @wraps(method)
     def cacher(url) -> str:
         """Caches the output
