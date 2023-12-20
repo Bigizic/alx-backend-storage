@@ -9,7 +9,7 @@ from typing import Callable
 
 
 # redis instance
-redis_history = redid.Redis()
+redis_history = redis.Redis()
 
 
 def fetch_data(method: Callable) -> Callable:
