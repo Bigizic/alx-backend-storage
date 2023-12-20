@@ -69,7 +69,8 @@ def replay(fn: Callable) -> None:
     method_outputs = history.lrange(output_k, 0, -1)
 
     for func_in, func_out in zip(method_inputs, method_outputs):
-        print(f'{method_name}(*{func_in}.decode("utf-8")) -> {func_out}')
+        print('{}(*{}) -> {}'.format(method_name, func_in.decode("utf-8"),
+              func_out))
 
 
 class Cache():
