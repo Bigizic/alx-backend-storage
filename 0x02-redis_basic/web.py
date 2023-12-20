@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""A module with tools for request caching and tracking.
+"""an expiring web cache and tracker
 """
 import redis
 import requests
@@ -8,16 +8,16 @@ from typing import Callable
 
 
 redis_history = redis.Redis()
-"""The module-level Redis instance.
+"""Redis instance
 """
 
 
 def data_cacher(method: Callable) -> Callable:
-    """Caches the output of fetched data.
+    """Fetches the output from cached data
     """
     @wraps(method)
     def invoker(url) -> str:
-        """The wrapper function for caching the output.
+        """caches the output.
         """
         redis_history.incr(f'count:{url}')
         result = redis_history.get(f'result:{url}')
@@ -33,7 +33,10 @@ def data_cacher(method: Callable) -> Callable:
 
 @data_cacher
 def get_page(url: str) -> str:
-    """Returns the content of a URL after caching the request's response,
-    and tracking the request.
+    """Uses requests module to obtain the HTML content of a particular URL
+    and returns it
+    @param (url): <str>
+
+    Return: <str>
     """
     return requests.get(url).text
